@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 import json
 
-load_dotenv("../API_KEY.env")
+load_dotenv("../venv/env/API_KEY.env")
 
 api_key = os.getenv("RIOT_API_KEY")
 
