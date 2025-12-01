@@ -1,0 +1,94 @@
+
+# -------------------------
+
+# React Native / Node.js
+
+# -------------------------
+
+node_modules/
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+.expo/
+dist/
+build/
+*.tmp
+*.log
+
+# -------------------------
+
+# Android
+
+# -------------------------
+
+android/.gradle/
+android/app/build/
+android/build/
+*.keystore
+*.iml
+local.properties
+
+# -------------------------
+
+# iOS
+
+# -------------------------
+
+ios/Pods/
+ios/build/
+*.xcodeproj/project.xcworkspace/
+*.xcworkspace/
+*.xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.app
+
+# -------------------------
+
+# Python / FastAPI
+
+# -------------------------
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+venv/
+env/
+.env
+
+# -------------------------
+
+# IDE / Editor
+
+# -------------------------
+
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# -------------------------
+
+# System
+
+# -------------------------
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# -------------------------
+
+# Misc
+
+# -------------------------
+
+*.log
+*.tmp
+coverage/
+pytest_cache/
+.ipynb_checkpoints/
