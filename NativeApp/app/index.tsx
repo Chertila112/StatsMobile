@@ -1,9 +1,11 @@
+import { Link } from "expo-router";
 import { Text, View } from "react-native";
+import SummonerSearch from "@/components/SummonerSearch";
 
 export default function Index() {
   return (
-    <View className="flex-1 justify-center items-center">
-      <Text className="text-5xl">Hello, world!</Text>
+    <View className="bg-dark-primary flex-1 justify-center items-center">
+      <SummonerSearch></SummonerSearch>
     </View>
   );
 }

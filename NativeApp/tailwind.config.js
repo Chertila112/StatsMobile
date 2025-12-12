@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -11,13 +11,12 @@ module.exports = {
           tertiary: '#e6e6e6'
         },
         dark: {
-          primary: '#000000',
-          secondary: '#0d0d0d',
-          tertiary: '#1a1a1a' 
+          primary: '#1a1a1a',
+          secondary: '#595959',
+          tertiary: '#b0b0b0'
         }
       }
     },
   },
   plugins: [],
 }
-

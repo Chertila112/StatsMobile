@@ -1,9 +1,23 @@
-
-export const UserCard = () => {
-
+import { StyleSheet, Text, View } from 'react-native'
+import { UserData } from '@/types/types'
+const UserCard = (data: UserData) => {
   return (
-    <div>
-
-    </div>
+    <View className='border'>
+      <Text>
+        {data.username}
+      </Text>
+      <Text>
+        {data.queueType}
+      </Text>
+      <Text>
+        {data.rank}
+      </Text>
+      <Text>
+        {data.tier}
+      </Text>
+    </View>
   )
 }
+
+export default UserCard
+
