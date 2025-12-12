@@ -2,18 +2,18 @@ import { StyleSheet, Text, View } from 'react-native'
 import { UserData } from '@/types/types'
 const UserCard = (data: UserData) => {
   return (
-    <View className='border'>
+    <View className='bg-dark-secondary border'>
       <Text>
-        {data.username}
+        SwaGGMaster69
       </Text>
       <Text>
-        {data.queueType}
+        Solo Ranked 5v5
       </Text>
       <Text>
-        {data.rank}
+        Platinum
       </Text>
       <Text>
-        {data.tier}
+        III
       </Text>
     </View>
   )

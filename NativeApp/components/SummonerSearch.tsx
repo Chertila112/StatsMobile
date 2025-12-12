@@ -2,8 +2,8 @@ import { TouchableOpacity, StyleSheet, Text, TextInput, View, KeyboardAvoidingVi
 import { useForm, Controller } from 'react-hook-form'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react'
-
-
+import fetchRankedStats from '@/api/getRankedStats';
+import { useQuery } from '@tanstack/react-query';
 type Summoner = {
   username: string,
   tag: string,
@@ -11,17 +11,28 @@ type Summoner = {
 }
 
 const SummonerSearch = () => {
-  const [data, setData] = useState();
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [tag, setTag] = useState('');
+  const [region, setRegion] = useState('');
+
 
   const {
     control,
     handleSubmit,
     formState: { errors }
   } = useForm<Summoner>();
+   
+  const {data, isPending, error} = useQuery({
+      queryKey: ['ranked', username, tag, region],
+      queryFn: () => fetchRankedStats(username, tag, region), 
+    }
+  )
 
-  const onSubmit = (data: Summoner) => {
-    setData(data);
+  const onSubmit = (data:Summoner) => {
+    setUsername(data.username);
+    setRegion(data.region);
+    setTag(data.tag)
   }
 
   const regionItems = [
@@ -141,9 +152,9 @@ const SummonerSearch = () => {
         >
           <Text className="text-black font-bold">Show</Text>
         </TouchableOpacity>
+        {isPending && (<Text>JSON.stringify(data)</Text>)}
       </View >
     </KeyboardAvoidingView>
   )
 }
-
-export default SummonerSearch
+export default SummonerSearch;
