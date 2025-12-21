@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { UserData } from '@/types/types'
-const UserCard = (data: UserData) => {
+const UserCard = () => {
   return (
     <View className='bg-dark-secondary border'>
       <Text>

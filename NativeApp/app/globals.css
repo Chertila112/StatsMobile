@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .error_popup {
+    @apply rounded-full mx-auto bg-red-400 h-1/4 w-1/2;
+  }
+}

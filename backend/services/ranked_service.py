@@ -25,8 +25,9 @@ class RankedService:
             response = await self.http_client.get(url, headers=settings.get_riot_headers())
             response.raise_for_status()
             ranked_data = response.json()
-            await self.redis.set(redis_key, json.dumps(ranked_data), ex=300)
-            return ranked_data
+            final = ranked_data[0]
+            await self.redis.set(redis_key, json.dumps(final), ex=300)
+            return final
         except httpx.HTTPStatusError as e:
             raise HTTPException(status_code=e.response.status_code, detail="Riot API error")
         except Exception as e:

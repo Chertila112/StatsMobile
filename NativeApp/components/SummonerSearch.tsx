@@ -1,57 +1,27 @@
-import { TouchableOpacity, StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Platform } from 'react-native'
+import { TouchableOpacity, Text, TextInput, View, KeyboardAvoidingView, Platform } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react'
-import fetchRankedStats from '@/api/getRankedStats';
-import { useQuery } from '@tanstack/react-query';
-type Summoner = {
-  username: string,
-  tag: string,
-  region: string
-}
+import { useRankStats } from '@/hooks/useRankStats';
+import { Summoner } from '@/types/types';
+import Popup from './Popup';
+import { regionItems } from '@/values/regionMap';
+
+
 
 const SummonerSearch = () => {
   const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState('');
-  const [tag, setTag] = useState('');
-  const [region, setRegion] = useState('');
+  const [formData, setFormData] = useState<Summoner | null>(null);
 
+  //=================== QUERY =========================
+  const { data, isLoading, isPending, error } = useRankStats(formData);
 
   const {
     control,
     handleSubmit,
     formState: { errors }
   } = useForm<Summoner>();
-   
-  const {data, isPending, error} = useQuery({
-      queryKey: ['ranked', username, tag, region],
-      queryFn: () => fetchRankedStats(username, tag, region), 
-    }
-  )
 
-  const onSubmit = (data:Summoner) => {
-    setUsername(data.username);
-    setRegion(data.region);
-    setTag(data.tag)
-  }
-
-  const regionItems = [
-    { label: 'RU', value: 'ru' },
-    { label: 'EUW', value: 'euw' },
-    { label: 'EUN', value: 'eun' },
-    { label: 'NA', value: 'na' },
-    { label: 'KR', value: 'kr' },
-    { label: 'BR', value: 'br' },
-    { label: 'JP', value: 'jp' },
-    { label: 'SEA', value: 'sea' },
-    { label: 'TW', value: 'tw' },
-    { label: 'VN', value: 'vn' },
-    { label: 'ME', value: 'me' },
-    { label: 'LAS', value: 'las' },
-    { label: 'LAN', value: 'lan' },
-    { label: 'TR', value: 'tr' },
-    { label: 'OCE', value: 'oce' },
-  ];
 
   return (
     <KeyboardAvoidingView
@@ -65,8 +35,8 @@ const SummonerSearch = () => {
             control={control}
             name='username'
             rules={{ required: 'This field cant be empty' }}
-            render={({ field: { value, onChange, onBlur }, fieldState }) => (
-              <View style={{ flex: 3 }} className='bg-dark-secondary border h-[40px] rounded-xl'>
+            render={({ field: { value, onChange, onBlur } }) => (
+              <View style={{ flex: 3 }} className='bg-dark-secondary border h-[40px] rounded-full'>
                 <TextInput
                   placeholder='Summoner name'
                   placeholderTextColor={'#1a1a1a'}
@@ -75,9 +45,6 @@ const SummonerSearch = () => {
                   onChangeText={onChange}
                   onBlur={onBlur}
                 />
-                {fieldState.error && (
-                  <Text style={{ color: 'red' }}>{fieldState.error.message}</Text>
-                )}
               </View>
             )}
           />
@@ -85,8 +52,8 @@ const SummonerSearch = () => {
             control={control}
             name='tag'
             rules={{ required: 'This field cant be empty' }}
-            render={({ field: { value, onChange, onBlur }, fieldState }) => (
-              <View style={{ flex: 2 }} className='border-y h-[40px] bg-dark-secondary border-l ml-1 rounded-l-xl'>
+            render={({ field: { value, onChange, onBlur } }) => (
+              <View style={{ flex: 2 }} className='border-y h-[40px] bg-dark-secondary border-l ml-1 rounded-l-full'>
                 <TextInput
                   placeholder='Tag'
                   placeholderTextColor={'#1a1a1a'}
@@ -95,9 +62,6 @@ const SummonerSearch = () => {
                   onChangeText={onChange}
                   onBlur={onBlur}
                 />
-                {fieldState.error && (
-                  <Text style={{ color: 'red' }}>{fieldState.error.message}</Text>
-                )}
               </View>
             )}
           />
@@ -112,15 +76,12 @@ const SummonerSearch = () => {
                 items={regionItems}
                 setOpen={setOpen}
                 setValue={onChange}
-                onSelectItem={(item) => {
-                  onChange(item.value);
-                }}
                 style={{
                   backgroundColor: '#595959',
                   borderWidth: 1,
                   borderColor: 'black',
-                  borderTopRightRadius: 12,
-                  borderBottomRightRadius: 12,
+                  borderTopRightRadius: 50,
+                  borderBottomRightRadius: 50,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
                   minHeight: 40,
@@ -147,14 +108,22 @@ const SummonerSearch = () => {
           />
         </View>
         <TouchableOpacity
-          className="bg-dark-tertiary pt-2 h-[40px] rounded-xl items-center mt-2"
-          onPress={handleSubmit(onSubmit)}
+          className="bg-dark-tertiary pt-2 h-[40px] rounded-full items-center mt-2"
+          onPress={handleSubmit(
+            (data: Summoner) => setFormData(data)
+          )
+          }
         >
           <Text className="text-black font-bold">Show</Text>
         </TouchableOpacity>
-        {isPending && (<Text>JSON.stringify(data)</Text>)}
+        {isLoading && <View className='border-4 border-dashed mx-auto my-2 rounded-full border-dark-secondary animate-spin h-10 w-10' />
+        }
+        {error && <Text className='text-dark-tertiary'>Error: {error.message}</Text>}
+        {!isPending && !error && <Text className='text-dark-tertiary'>{`${data?.tier} ${data?.rank}`}</Text>}
       </View >
-    </KeyboardAvoidingView>
+      {errors.username && <Popup msg={`${errors.username?.message}: username`} />}
+    </KeyboardAvoidingView >
   )
 }
+
 export default SummonerSearch;

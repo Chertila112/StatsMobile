@@ -1,13 +1,18 @@
-import { UserData } from "@/types/types";
+import { SummonerRank } from "@/types/types";
+import { SummonerRankSchema } from "@/types/types";
 
-const base_url = process.env.BASE_URL
-
-async function getRankedStats(username: string, tag: string, region: string): Promise<UserData> {
-  const response = await fetch(`${base_url}/api/ranked/${region}/${username}/${tag}`);
-  if (!response.ok) {
+async function getRankedStats(username: string, tag: string, region: string): Promise<SummonerRank> {
+  console.log(`--- Making API call with: /api/ranked/${region}/${username}/${tag}`);
+  const response = await fetch(`http://192.168.1.95:8000/api/ranked/${region}/${username}/${tag}`); if (!response.ok) {
     throw new Error(`HTTPError, status: ${response.status}`)
   }
-  return response.json();
+  const data = await response.json();
+
+  const rawData = SummonerRankSchema.safeParse(data)
+  if (!rawData.success)
+    throw rawData.error;
+
+  return rawData.data;
 }
 
 export default getRankedStats;

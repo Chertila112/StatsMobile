@@ -1,5 +1,4 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import SummonerSearch from "@/components/SummonerSearch";
 
 export default function Index() {
