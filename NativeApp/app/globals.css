@@ -4,6 +4,12 @@
 
 @layer components {
   .error_popup {
-    @apply rounded-full mx-auto bg-red-400 h-1/4 w-1/2;
+    @apply mx-auto rounded-3xl bg-red-300 h-auto w-[150px];
+  }
+  .loading {
+    @apply h-12 w-12 mx-auto border-dark-7 border-[5px] rounded-full border-dashed animate-spin
+  }
+  .player-item {
+    @apply border-dark-6 border overflow-hidden rounded-xl flex-1
   }
 }

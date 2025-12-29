@@ -1,4 +1,4 @@
-from sqlmodel import Session, select
+from sqlmodel import select
 from models.models import User
 from core.database import get_session
 

@@ -11,7 +11,7 @@ class UserService:
 
     async def get_user_by_riot_id(self, username: str, tag: str) -> User:
         
-        url = f"https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{username}/{tag}"
+        url = f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{username}/{tag}"
         try:
             response = await self.http_client.get(url, headers=settings.get_riot_headers())
             response.raise_for_status()
@@ -26,8 +26,8 @@ class UserService:
                 return db_user
 
             user_to_create = {
-                "username": username,
-                "tag": tag,
+                "username": user_data_from_api.get("gameName"),
+                "tag": user_data_from_api.get("tagLine"),
                 "puuid": puuid
             }
             new_user = self.user_repository.create_user(user_to_create)

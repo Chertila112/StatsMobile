@@ -25,7 +25,7 @@ class MasteryService:
             response = await self.http_client.get(url, headers=settings.get_riot_headers())
             response.raise_for_status()
             mastery_data = response.json()
-            await self.redis.set(redis_key, json.dumps(mastery_data), ex=300)  # Cache for 5 minutes
+            await self.redis.set(redis_key, json.dumps(mastery_data), ex=3600)
             return mastery_data
         except httpx.HTTPStatusError as e:
             raise HTTPException(status_code=e.response.status_code, detail="Riot API error")
