@@ -1,6 +1,6 @@
 import { Participant } from "@/types/types";
 import { View, Text } from 'react-native'
-import MatchParticipant from "../user/MatchParticipant";
+import MatchParticipant from "../match/MatchParticipant";
 
 
 interface TeamColumnProps {

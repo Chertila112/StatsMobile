@@ -1,17 +1,17 @@
 export const SummonerSpellMap: Record<string, string> = {
   "21": "SummonerBarrier",
-  "1": "SummonerBoost",     // Cleanse (Очищение)
-  "14": "SummonerDot",      // Ignite (Воспламенение)
-  "3": "SummonerExhaust",   // Exhaust (Изнурение)
-  "4": "SummonerFlash",     // Flash (Скачок)
-  "6": "SummonerHaste",     // Ghost (Призрак)
-  "7": "SummonerHeal",      // Heal (Исцеление)
-  "13": "SummonerMana",     // Clarity (Ясность - обычно ARAM)
-  "11": "SummonerSmite",    // Smite (Кара)
-  "12": "SummonerTeleport", // Teleport (Телепорт)
+  "1": "SummonerBoost",     // Cleanse
+  "14": "SummonerDot",      // Ignite 
+  "3": "SummonerExhaust",   // Exhaust
+  "4": "SummonerFlash",     // Flash
+  "6": "SummonerHaste",     // Ghost
+  "7": "SummonerHeal",      // Heal
+  "13": "SummonerMana",     // Clarity 
+  "11": "SummonerSmite",    // Smite 
+  "12": "SummonerTeleport", // Teleport
 
-  "32": "SummonerSnowball", // Mark (Снежок)
-  "30": "SummonerPoroRecall", // To the King!
-  "31": "SummonerPoroThrow",  // Poro Toss
-  "39": "SummonerSnowURFSnowball_Mark", // URF Snowball
+  "32": "SummonerSnowball",
+  "30": "SummonerPoroRecall",
+  "31": "SummonerPoroThrow",
+  "39": "SummonerSnowURFSnowball_Mark",
 }

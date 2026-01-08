@@ -8,7 +8,7 @@ export const useRankStats = (props: Summoner | null) => {
     queryFn: () => getRankedStats(props!.username, props!.tag, props!.region),
     enabled: !!props,
     refetchOnWindowFocus: false,
-    retry: false,
+    retry: false
   }
   )
 }

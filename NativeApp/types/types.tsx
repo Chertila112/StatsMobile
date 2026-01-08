@@ -2,7 +2,7 @@ import * as z from 'zod'
 
 export const SummonerRankSchema = z.object({
   puuid: z.string(),
-  queueType: z.string(),
+  queueType: z.string().optional(),
   tier: z.string(),
   rank: z.string(),
   wins: z.number(),
@@ -231,7 +231,6 @@ export type Summoner = {
   tag: string,
   region: string,
 }
-
 
 
 

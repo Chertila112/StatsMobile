@@ -1,4 +1,3 @@
-
 export const regionItems = [
   { label: 'RU', value: 'ru' },
   { label: 'EUW', value: 'euw' },

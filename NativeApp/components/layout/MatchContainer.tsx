@@ -1,6 +1,6 @@
 import { SummonerRank } from '@/types/types'
 import { View, FlatList } from 'react-native'
-import MatchCard from '../user/MatchCard'
+import MatchCard from '../match/MatchCard'
 import { useMatches } from '@/hooks/useMatches'
 import Popup from '../Popup'
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
@@ -25,7 +25,7 @@ const MatchContainer = ({ SummonerStats }: MatchContainerProps) => {
           renderItem={({ item, index }) => (
             <Animated.View
               entering={index % 2 === 0 ? FadeInLeft.delay(index * 100).duration(300) : FadeInRight.delay(index * 100).duration(300)}>
-              <MatchCard version={SummonerStats.version} matchId={item.metadata.matchId} puuid={SummonerStats.puuid} players={item.info.participants} />
+              <MatchCard matchId={item.metadata.matchId} puuid={SummonerStats.puuid} players={item.info.participants} />
             </Animated.View>
           )}
           ItemSeparatorComponent={() => <View className='h-[4px]'></View>}

@@ -5,3 +5,4 @@ export const calculateWinRate = (data: SummonerRank) => (data?.wins / (data?.los
 export const calculateFarm = (player: Participant) => player.neutralMinionsKilled + player.totalMinionsKilled;
 
 export const calculateKDA = (kills: number, deaths: number, assists: number) => deaths != 0 ? ((kills + assists) / deaths).toFixed(2) : (kills + assists)
+
