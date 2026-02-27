@@ -12,7 +12,9 @@ export const DDragon = {
     const version = useVersion.getState().version;
     return `http://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId.toString()}.png`
   },
-
+  getAbility: (championName: string, ability: string) => {
+    return `https://cdn.communitydragon.org/latest/champion/${championName}/ability-icon/${ability}`
+  },
   getSummonerSpell: (summonerSpellId: number) => {
     const version = useVersion.getState().version;
     return `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${SummonerSpellMap[summonerSpellId]}.png`

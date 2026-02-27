@@ -1,4 +1,5 @@
 import { TouchableOpacity, Text, TextInput, View } from 'react-native'
+import CardWrapperShadow from '../CardWrapperShadow';
 import { useForm, Controller } from 'react-hook-form'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react'
@@ -86,6 +87,7 @@ const SummonerSearch = ({ setContext }: contextProps) => {
                 flex: 2,
               }}
               dropDownContainerStyle={{
+                borderWidth: 0,
                 backgroundColor: '#232323',
               }}
               textStyle={{

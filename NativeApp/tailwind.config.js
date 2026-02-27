@@ -23,6 +23,11 @@ module.exports = {
           1: '#a9ff68',
           2: '#e9b7ce'
         }
+      },
+      fontFamily: {
+        'sans': ['Inter_400Regular'],
+        'sans-medium': ['Inter_500Medium'],
+        'sans-bold': ['Inter_700Bold'],
       }
     },
   },

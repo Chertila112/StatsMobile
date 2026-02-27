@@ -33,7 +33,7 @@ const TeamColumn = ({ players, didWin, align }: TeamColumnProps) => {
   )
 
   return (
-    <View className={`flex-column gap-2 flex-1 ${alignClass}`}>
+    <View className={`flex-column flex-1 ${alignClass}`}>
       <View className={`${align === 'end' ? 'flex-row-reverse' : 'flex-row'} items-center gap-2`}>
         <Text className={`font-bold text-xl ${textColor}`}>
           {didWin ? 'Victory' : 'Defeat'}

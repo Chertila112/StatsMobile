@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { string } from "zod";
 
 
 const PositionSchema = z.object({
@@ -63,7 +63,6 @@ const VictimDamageSchema = z.object({
 
 const BaseEventSchema = z.object({
   timestamp: z.number(),
-  type: z.string()
 });
 
 const PauseEndEventSchema = BaseEventSchema.extend({
@@ -123,17 +122,38 @@ const TurretPlateDestroyedEventSchema = BaseEventSchema.extend({
   type: z.literal('TURRET_PLATE_DESTROYED')
 });
 
-const EventSchema = z.union([
+const BuildingKillEventSchema = BaseEventSchema.extend({
+  bounty: z.number(),
+  buildingType: z.string(),
+  killerId: z.number(),
+  laneType: z.string(),
+  position: PositionSchema,
+  teamId: z.number(),
+  towerType: z.string(),
+  type: z.literal('BUILDING_KILL')
+});
+
+const KnownEventSchema = z.discriminatedUnion('type', [
   PauseEndEventSchema,
   ItemPurchasedEventSchema,
   ItemDestroyedEventSchema,
   SkillLevelUpEventSchema,
   LevelUpEventSchema,
   WardPlacedEventSchema,
+  BuildingKillEventSchema,
   ChampionKillEventSchema,
   TurretPlateDestroyedEventSchema,
-  BaseEventSchema
 ]);
+
+const UnknownEventSchema = BaseEventSchema.extend({
+  type: z.string(),
+});
+
+const EventSchema = z.union([
+  KnownEventSchema, UnknownEventSchema
+])
+
+export type event = z.infer<typeof EventSchema>;
 
 const ParticipantFrameSchema = z.object({
   championStats: ChampionStatsSchema,
@@ -176,3 +196,18 @@ export const MatchTimelineSchema = z.object({
 });
 
 export type MatchTimeline = z.infer<typeof MatchTimelineSchema>;
+
+export type ParticipantFrameTimed = {
+  participants: ParticipantFrame[],
+  timestamp: number
+}
+
+export type statByTimestamp = {
+  stat: number,
+  timestamp: number
+}
+
+export type participantEvents = {
+  participantId: number,
+  events: event[],
+}

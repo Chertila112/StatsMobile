@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { Participant } from '@/types/types';
-import { ParticipantFrame } from '@/types/matchTimeline';
+import { ParticipantFrame, ParticipantFrameTimed } from '@/types/matchTimeline';
+import { statByTimestamp } from '@/types/matchTimeline';
 
 interface TeamGold {
-  t1gold: number[];
-  t2gold: number[];
+  t1gold: statByTimestamp[];
+  t2gold: statByTimestamp[];
 }
 
 interface TotalGold {
@@ -13,15 +14,20 @@ interface TotalGold {
 }
 
 export const useTeamGoldTimeline = (
-  tframe1: Array<ParticipantFrame[]>,
-  tframe2: Array<ParticipantFrame[]>
+  tframe1: Array<ParticipantFrameTimed>,
+  tframe2: Array<ParticipantFrameTimed>
 ): TeamGold => {
   return useMemo<TeamGold>(() => {
-    const calculateTeamGold = (frames: Array<ParticipantFrame[]>): number[] =>
-      frames.map((playerFrames: ParticipantFrame[]) =>
-        playerFrames.reduce((total: number, pframe: ParticipantFrame) =>
-          total + pframe.totalGold, 0
-        )
+    const calculateTeamGold = (frames: Array<ParticipantFrameTimed>): statByTimestamp[] =>
+      frames.map((playerFrames: ParticipantFrameTimed): statByTimestamp => {
+        return {
+          stat: playerFrames.participants.reduce((total: number, pframe: ParticipantFrame) =>
+            total + pframe.totalGold, 0
+          ),
+          timestamp: playerFrames.timestamp,
+
+        }
+      }
       );
 
     return {

@@ -1,13 +1,10 @@
-import { MatchInfo } from "@/types/types";
-import { useEffect } from "react";
-import { usePlayerStore } from "./currentPlayerStore";
+import { MatchInfo, Participant } from "@/types/types";
+import { useMemo } from "react";
 
-export const useCurrentPlayer = (matchInfoData: MatchInfo | undefined, puuid: string) => {
-
-  const { setCurrentPlayer } = usePlayerStore();
-  useEffect(() => {
-    const player = matchInfoData?.info.participants.find(p => p.puuid === puuid);
-    if (player)
-      setCurrentPlayer(player);
-  }, [puuid, matchInfoData, setCurrentPlayer]);
+export const useCurrentPlayer = (matchInfoData: MatchInfo | undefined, puuid: string): Participant | undefined => {
+  return useMemo(() => {
+    if (!matchInfoData)
+      return undefined;
+    return matchInfoData?.info.participants.find(p => p.puuid === puuid);
+  }, [puuid, matchInfoData]);
 }

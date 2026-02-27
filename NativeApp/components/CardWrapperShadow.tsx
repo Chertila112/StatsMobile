@@ -3,16 +3,29 @@ import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 
 interface CardWrapperShadowProps {
-  children: React.ReactNode
+  children: React.ReactNode;
+  radius?: number;
 }
 
-function CardWrapperShadow({ children }: CardWrapperShadowProps) {
+function CardWrapperShadow({ radius, children }: CardWrapperShadowProps) {
+  const styles = StyleSheet.create({
+    wrapper: {
+      width: '100%',
+      marginVertical: 4,
+    },
+    gradientBorder: {
+      borderRadius: !radius ? 22 : radius,
+      paddingTop: 1.5,
+      paddingBottom: 3
+    },
+  });
+
   return (
-    <View className='w-full' style={styles.wrapper}>
+    <View style={styles.wrapper}>
       <LinearGradient
         colors={[
-          'rgba(255, 255, 255, 0.15)',
-          'rgba(255, 255, 255, 0.05)',
+          'rgba(255, 255, 255, 0.20)',
+          'rgba(255, 255, 255, 0)',
           'rgba(0, 0, 0, 0.2)'
         ]}
         start={{ x: 0.3, y: 0 }}
@@ -27,13 +40,3 @@ function CardWrapperShadow({ children }: CardWrapperShadowProps) {
 
 export default CardWrapperShadow
 
-const styles = StyleSheet.create({
-  wrapper: {
-    marginVertical: 4,
-  },
-  gradientBorder: {
-    borderRadius: 22,
-    paddingTop: 1.5,
-    paddingBottom: 3
-  },
-});

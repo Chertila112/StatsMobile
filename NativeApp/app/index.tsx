@@ -1,4 +1,4 @@
-import { View, Animated, Easing } from "react-native";
+import { View, Animated, Easing, Text } from "react-native";
 import SummonerSearch from "@/components/user/SummonerSearch";
 import { useEffect, useRef, useState } from "react";
 import { Summoner } from "@/types/types";
@@ -34,7 +34,7 @@ export default function Index() {
 
   return (
     <View
-      className="bg-dark-1 flex-1 justify-start pt-10">
+      className="bg-dark-1 flex-1 justify-start pt-10 items-center">
       <Animated.View
         style={{ transform: [{ translateY }] }}>
         <SummonerSearch setContext={handleSearch}></SummonerSearch>

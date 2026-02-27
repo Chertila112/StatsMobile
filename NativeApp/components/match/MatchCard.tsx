@@ -43,7 +43,6 @@ const MatchCard = ({ matchId, players, puuid }: MatchCardProps) => {
             <SummonerSpell spellId={player.summoner2Id} />
           </View>
 
-          {/* Stats and items */}
           <View className='flex-2 flex-row w-2/3 bg-dark-3 rounded-r-2xl'>
             <View className='flex-1 justify-center'>
               <Text className={`text-lg text-center font-semibold ${player.win ? 'text-green-500' : 'text-red-500'}`}>

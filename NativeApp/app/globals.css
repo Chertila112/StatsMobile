@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-sans;
+  }
+}
+
 @layer components {
   .error_popup {
     @apply mx-auto rounded-3xl bg-red-300 h-auto w-[150px];
